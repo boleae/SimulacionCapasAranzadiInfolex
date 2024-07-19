@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Ventana Principal</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Incluye jQuery UI -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <!-- Incluye el CSS de jQuery UI -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="layout.css" />
+
+</head>
+<body>
+    <button id="openWindowBtn">Abrir Ventana</button>
+    <div id="jsonOutput"></div>
+    <div id="infolexRequestDialog" class="tree-dossieres tree-traerInfolex ui-dialog-content ui-widget-content">
+    </div>
+    <label for="numeroExpediente">El número del expediente es:</label>
+    <input type="text" id="numeroExpediente" name="numeroExpediente">
+    <script>
+        let languages = {};
+        languages["infolex.data.button"] = "Cargar Expediente";
+        languages["infolex.data.estructura"] = "Estructura organizativa del expediente";
+        languages["infolex.data.estructura.descripcion"] = "Descripción";
+        languages["infolex.data.estructura.poblacion"] = "Población";
+        languages["infolex.data.estructura.provincia"] = "Provincia";
+        languages["infolex.data.expediente"] = "Expediente";
+        languages["infolex.data.expediente.descripcion"] = "Descripción";
+        languages["infolex.data.expediente.materia"] = "Materia";
+        languages["infolex.data.expediente.numero_expediente"] = "Número de expediente";
+        languages["infolex.data.fase_actual_expediente"] = "Fase Actual del expediente";
+        languages["infolex.data.fase_actual_expediente.costas_presupuestadas"] = "Costas Presupuestadas";
+        languages["infolex.data.fase_actual_expediente.cuantia_reclamada"] = "Cuantía reclamada";
+        languages["infolex.data.fase_actual_expediente.desc_procedimiento"] = "Descripción Procedimiento";
+        languages["infolex.data.fase_actual_expediente.importe"] = "Importe";
+        languages["infolex.data.fase_actual_expediente.intereses_presupuestados"] = "Intereses Presupuestados";
+        languages["infolex.data.fase_actual_expediente.numero_autos"] = "Número de autos";
+        languages["infolex.data.fase_actual_expediente.organo"] = "Órgano";
+        languages["infolex.data.fase_actual_expediente.organo.codigo_postal"] = "Código Postal";
+        languages["infolex.data.fase_actual_expediente.organo.descripcion"] = "Descripción";
+        languages["infolex.data.fase_actual_expediente.organo.direccion"] = "Dirección";
+        languages["infolex.data.fase_actual_expediente.organo.poblacion"] = "Población";
+        languages["infolex.data.fase_actual_expediente.organo.provincia"] = "Provincia";
+        languages["infolex.data.fase_actual_expediente.total_reclamado"] = "Total Reclamado";
+        languages["infolex.data.fecha_actual"] = "Fecha actual";
+        languages["infolex.data.fecha_actual_texto"] = "Fecha actual texto";
+        languages["infolex.data.help.modal"] = "Ayuda";
+        languages["infolex.data.implicados"] = "Implicados";
+        languages["infolex.data.implicados.cliente"] = "Cliente";
+        languages["infolex.data.implicados.cliente.codigo_postal"] = "Código Postal";
+        languages["infolex.data.implicados.cliente.direccion"] = "Dirección";
+        languages["infolex.data.implicados.cliente.estado_civil"] = "Estado civil";
+        languages["infolex.data.implicados.cliente.nif"] = "NIF";
+        languages["infolex.data.implicados.cliente.nombre"] = "Nombre y apellidos";
+        languages["infolex.data.implicados.cliente.poblacion"] = "Población";
+        languages["infolex.data.implicados.cliente.provincia"] = "Provincia";
+        languages["infolex.data.implicados.contrario"] = "Contrario";
+        languages["infolex.data.implicados.contrario.codigo_postal"] = "Código Postal";
+        languages["infolex.data.implicados.contrario.direccion"] = "Dirección";
+        languages["infolex.data.implicados.contrario.estado_civil"] = "Estado civil";
+        languages["infolex.data.implicados.contrario.nif"] = "NIF";
+        languages["infolex.data.implicados.contrario.nombre"] = "Nombre y apellidos";
+        languages["infolex.data.implicados.contrario.poblacion"] = "Población";
+        languages["infolex.data.implicados.contrario.provincia"] = "Provincia";
+        languages["infolex.data.implicados.letrado"] = "Letrado";
+        languages["infolex.data.implicados.letrado.codigo_postal"] = "Código Postal";
+        languages["infolex.data.implicados.letrado.colegio"] = "Colegio";
+        languages["infolex.data.implicados.letrado.direccion"] = "Dirección";
+        languages["infolex.data.implicados.letrado.estado_civil"] = "Estado civil";
+        languages["infolex.data.implicados.letrado.nif"] = "NIF";
+        languages["infolex.data.implicados.letrado.nombre"] = "Nombre y apellidos";
+        languages["infolex.data.implicados.letrado.numero_colegiado"] = "Número de colegiado";
+        languages["infolex.data.implicados.letrado.poblacion"] = "Población";
+        languages["infolex.data.implicados.letrado.provincia"] = "Provincia";
+        languages["infolex.data.implicados.notario"] = "Notario";
+        languages["infolex.data.implicados.notario.codigo_postal"] = "Código Postal";
+        languages["infolex.data.implicados.notario.direccion"] = "Dirección";
+        languages["infolex.data.implicados.notario.estado_civil"] = "Estado civil";
+        languages["infolex.data.implicados.notario.nif"] = "NIF";
+        languages["infolex.data.implicados.notario.nombre"] = "Nombre y apellidos";
+        languages["infolex.data.implicados.notario.poblacion"] = "Población";
+        languages["infolex.data.implicados.notario.provincia"] = "Provincia";
+        languages["infolex.data.implicados.procurador"] = "Procurador";
+        languages["infolex.data.implicados.procurador.codigo_postal"] = "Código Postal";
+        languages["infolex.data.implicados.procurador.colegio"] = "Colegio";
+        languages["infolex.data.implicados.procurador.direccion"] = "Dirección";
+        languages["infolex.data.implicados.procurador.estado_civil"] = "Estado civil";
+        languages["infolex.data.implicados.procurador.nif"] = "NIF";
+        languages["infolex.data.implicados.procurador.nombre"] = "Nombre y apellidos";
+        languages["infolex.data.implicados.procurador.numero_colegiado"] = "Número de colegiado";
+        languages["infolex.data.implicados.procurador.poblacion"] = "Población";
+        languages["infolex.data.implicados.procurador.provincia"] = "Provincia";
+        languages["infolex.data.implicados.responsable"] = "Responsable";
+        languages["infolex.data.implicados.responsable.codigo_postal"] = "Código Postal";
+        languages["infolex.data.implicados.responsable.direccion"] = "Dirección";
+        languages["infolex.data.implicados.responsable.estado_civil"] = "Estado civil";
+        languages["infolex.data.implicados.responsable.nif"] = "NIF";
+        languages["infolex.data.implicados.responsable.nombre"] = "Nombre y apellidos";
+        languages["infolex.data.implicados.responsable.poblacion"] = "Población";
+        languages["infolex.data.implicados.responsable.provincia"] = "Provincia";
+        languages["infolex.data.implicados.tercero"] = "Tercero";
+        languages["infolex.data.implicados.tercero.codigo_postal"] = "Código Postal";
+        languages["infolex.data.implicados.tercero.direccion"] = "Dirección";
+        languages["infolex.data.implicados.tercero.estado_civil"] = "Estado civil";
+        languages["infolex.data.implicados.tercero.nif"] = "NIF";
+        languages["infolex.data.implicados.tercero.nombre"] = "Nombre y apellidos";
+        languages["infolex.data.implicados.tercero.poblacion"] = "Población";
+        languages["infolex.data.implicados.tercero.provincia"] = "Provincia";
+        var htmlGenerado = "";
+        document.getElementById('openWindowBtn').addEventListener('click', function () {
+            window.open('https://localhost:44359/Infolex.html', 'secondaryWindow', 'width=600,height=400');
+        });
+
+        window.addEventListener('message', function (event) {
+
+            // Verificar el origen del mensaje por seguridad
+            if (event.origin === 'https://localhost:44359') {
+                prueba = $("#infolexRequestDialog").dialog({
+                    autoOpen: false,
+                    width: 250,
+                    height: 550,
+                    modal: false,
+                    title: languages['infolex.data.button']
+                });
+                var helpText = "Toma el texto y arrástralo a los espacios en blanco.";
+                var jsonTree = $.parseJSON(event.data).ix_data;
+                htmlGenerado = "<div id='popup-traerInfolex-ayuda'><img src='/maf/s/insignis/images/information.png'><span>" + helpText + "</span></div>";
+                htmlGenerado = htmlGenerado.concat("<div id='pop-up-traerInfolex' class='jstree jstree-0 jstree-focused jstree-researchspace'><ul>");
+                populateChildren(jsonTree, "infolex.data");
+                htmlGenerado = htmlGenerado.concat("</div></ul>");
+                $("#infolexRequestDialog").html(htmlGenerado);
+                $("#infolexRequestDialog").parent().animate({ 'left': 5 }, 1);
+
+                prueba.dialog("open");
+
+                // const jsonOutput = document.getElementById('jsonOutput');
+                // jsonOutput.textContent = JSON.stringify(event.data, null, 2);
+            }
+        });
+
+        function populateChildren(jsonData, prefix) {
+
+            $.each(jsonData, function (key, val) {
+                if (val.lista != null) {
+                    htmlGenerado = htmlGenerado.concat("<li class='jstree-open' rel='rootfolder'>");
+                    htmlGenerado = htmlGenerado.concat("<ins class='jstree-icon'>&nbsp;</ins>");
+                    //comprobar si con la key podemos sacar langstring, si no, name
+                    var actualPrefix = prefix + "." + val.var_name;
+                    if (languages[actualPrefix] != undefined) {
+                        htmlGenerado = htmlGenerado.concat(languages[actualPrefix]);
+                    } else {
+                        htmlGenerado = htmlGenerado.concat(val.name);
+                    }
+                    htmlGenerado = htmlGenerado.concat("<ul>");
+
+                    populateChildren(val.lista, actualPrefix);
+
+                    htmlGenerado = htmlGenerado.concat("</ul>");
+                    htmlGenerado = htmlGenerado.concat("</li>");
+                } else if ($.trim(val.value) != "") {
+                    htmlGenerado = htmlGenerado.concat("<li class='jstree-leaf' rel='rootfolder'>");
+                    htmlGenerado = htmlGenerado.concat("<ins class='jstree-icon'>&nbsp;</ins>");
+                    var actualPrefix = prefix + "." + val.var_name;
+                    var actualTag = val.name;
+                    if (languages[actualPrefix] != undefined) {
+                        actualTag = languages[actualPrefix];
+                    }
+                    htmlGenerado = htmlGenerado.concat("<span class='titulo'>" + actualTag + ": </span>");
+                    htmlGenerado = htmlGenerado.concat("<span>" + val.value + "</span>");
+                    htmlGenerado = htmlGenerado.concat("</li>");
+                }
+            });
+        }
+
+
+    </script>
+
+
+
+</body>
+</html>

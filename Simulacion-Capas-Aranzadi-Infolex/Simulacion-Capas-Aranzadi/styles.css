@@ -1,0 +1,52 @@
+﻿#popup-traerInfolex-ayuda {
+    border-bottom: 1px solid #c6c6c6;
+    margin: 0.5em 0.5em 0 1em;
+    min-height: 30px;
+    padding-bottom: 0.5em;
+    width: 100%;
+}
+
+    #popup-traerInfolex-ayuda > span {
+        left: 3em;
+        position: absolute;
+        *white-space: normal;
+        *width: 80%;
+    }
+
+#pop-up-traerInfolex {
+    background: white none repeat scroll 0 0 !important;
+    border: 1px solid #d2d2d2;
+    border-radius: 5px;
+    margin: 0 20px 10px 0 !important;
+    padding: 10px;
+}
+
+div#infolexRequestDialog.tree-traerInfolex, div#infolexRequestDialog.tree-traerInfolex {
+    padding-left: 0;
+    overflow: auto;
+}
+
+div#infolexRequestDialog.tree-dossieres div#pop-up-traerInfolex.jstree-researchspace li,
+div#infolexRequestDialog.tree-dossieres div#pop-up-traerInfolex.jstree-researchspace ins {
+    background-image: url("../images/rspace/d-dossieres.png");
+}
+
+div.ui-widget-content div#infolexRequestDialog.tree-dossieres div.jstree li {
+    background-image: none !important;
+}
+
+div#pop-up-traerInfolex {
+    border: none;
+}
+
+    div#pop-up-traerInfolex ul li span + span {
+        white-space: normal;
+    }
+
+    div#pop-up-traerInfolex ul li span .titulo {
+        font-weight: bold;
+    }
+
+    div#pop-up-traerInfolex li {
+        width: 212px;
+    }

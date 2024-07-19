@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Ventana Principal</title>
+</head>
+<body>
+    <button id="openWindowBtn">Abrir Ventana</button>
+    <div id="jsonOutput"></div>
+    <script>
+    document.getElementById('openWindowBtn').addEventListener('click', function () {
+            window.open('https://localhost:44359/Infolex.html', 'secondaryWindow', 'width=600,height=400');
+        });
+
+        window.addEventListener('message', function (event) {
+            // Verificar el origen del mensaje por seguridad
+            if (event.origin === 'https://localhost:44359') {
+                const jsonOutput = document.getElementById('jsonOutput');
+                jsonOutput.textContent = JSON.stringify(event.data, null, 2);
+            }
+        });
+    </script>
+
+
+
+</body>
+</html>

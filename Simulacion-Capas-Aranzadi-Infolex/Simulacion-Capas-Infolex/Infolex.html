@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Ventana Secundaria</title>
+</head>
+<body>
+    <button id="sendJsonBtn">Enviar JSON</button>
+    <script>document.getElementById('sendJsonBtn').addEventListener('click', function () {
+            var jsonDataString = "{\"ix_data\":[{\"lista\":[{\"value\":\"11 | MER - 2024 / 17\",\"var_name\":\"numero_expediente\",\"name\":\"Número de expediente\"},{\"value\":\"Prueba\",\"var_name\":\"descripcion\",\"name\":\"Descripción\"}],\"var_name\":\"expediente\",\"name\":\"Expediente\"},{\"lista\":[{\"value\":\"0,00€\",\"var_name\":\"cuantia_reclamada\",\"name\":\"Cuantía reclamada\"},{\"value\":\"0,00€\",\"var_name\":\"intereses_presupuestados\",\"name\":\"Intereses Presupuestados\"},{\"value\":\"0,00€\",\"var_name\":\"costas_presupuestadas\",\"name\":\"Costas Presupuestadas\"},{\"value\":\"0,00€\",\"var_name\":\"total_reclamado\",\"name\":\"Total Reclamado\"}],\"var_name\":\"fase_actual_expediente\",\"name\":\"Fase Actual del expediente\"},{\"lista\":[{\"value\":\"1.1\",\"var_name\":\"descripcion\",\"name\":\"Descripción\"}],\"var_name\":\"estructura\",\"name\":\"Estructura organizativa del expediente\"},{\"value\":\"19 /07 / 2024\",\"var_name\":\"fecha_actual\",\"name\":\"Fecha actual\"},{\"value\":\"viernes, 19 de julio de 2024\",\"var_name\":\"fecha_actual_texto\",\"name\":\"Fecha actual texto\"}]}";
+
+            const jsonData = {
+                nombre: "Juan",
+                edad: 30,
+                ocupacion: "Desarrollador"
+            };
+
+            // Enviar el mensaje a la ventana padre
+            window.opener.postMessage(jsonDataString, 'https://localhost:44301/Aranzadi.html');
+
+            // Cerrar la ventana actual
+            window.close();
+    });
+  </script>
+
+</body>
+</html>
